@@ -1,10 +1,13 @@
 package deportistas;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class DeportistasPremiados {
@@ -12,7 +15,6 @@ public class DeportistasPremiados {
 	private TreeMap<Integer, ArrayList<String>> premiados;
 
 	public DeportistasPremiados() {
-		
 		this.premiados = new TreeMap<Integer, ArrayList<String>>();
 	}
 	
@@ -51,9 +53,23 @@ public class DeportistasPremiados {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void generarResultado(String salida) throws IOException{
+		PrintWriter pr = new PrintWriter(new File(salida)); 
 		
-		
-
+		for (Map.Entry<Integer, ArrayList<String>> entry : premiados.entrySet()) {
+			Integer anio = entry.getKey();
+			ArrayList<String> lista = entry.getValue();
+			
+			pr.println("Año: " + anio);
+			for (String s : lista) {
+				pr.println(s);
+			}
+			
+		}
+		pr.close();
+	
 	}
 
 	protected TreeMap<Integer, ArrayList<String>> getPremiados() {
@@ -61,10 +77,12 @@ public class DeportistasPremiados {
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		DeportistasPremiados dp = new DeportistasPremiados();
 		dp.leerDerportistas("premiados.in");
 		System.out.println(dp.getPremiados());
+		
+		dp.generarResultado("premiados.out");
 	}
 
 	
