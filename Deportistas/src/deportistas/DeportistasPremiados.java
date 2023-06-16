@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,7 +16,7 @@ public class DeportistasPremiados {
 	private TreeMap<Integer, ArrayList<String>> premiados;
 
 	public DeportistasPremiados() {
-		this.premiados = new TreeMap<Integer, ArrayList<String>>();
+		this.premiados = new TreeMap<Integer, ArrayList<String>>(Collections.reverseOrder()); //para ponerlo invertido, vale para TreeMap y para TreeSet
 	}
 	
 	public void leerDerportistas(String archivo) {
